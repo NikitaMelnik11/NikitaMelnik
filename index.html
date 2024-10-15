@@ -6,17 +6,16 @@
     <title>Nikita Melnik - Rising Basketball Star</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="images/x-icon"
-    href="https://cdn.icon-icons.com/icons2/79/PNG/256/games_ball_basketball_15278.png">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #f8f8f8;
-            --accent-color: #ffa500;
+            --primary-color: #FF6B35;
+            --secondary-color: #004E89;
+            --accent-color: #FFD700;
             --text-color: #333;
-            --timeline-color: #e0e0e0;
+            --bg-color: #F5F5F5;
+            --white: #FFFFFF;
         }
         
         * {
@@ -26,10 +25,10 @@
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--secondary-color);
+            background-color: var(--bg-color);
         }
         
         .container {
@@ -39,16 +38,11 @@
         }
         
         header {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
+            background-color: rgba(0, 78, 137, 0.9);
             position: fixed;
             width: 100%;
             z-index: 1000;
-            transition: background-color 0.3s ease;
-        }
-        
-        header.scrolled {
-            background-color: rgba(26, 26, 26, 0.9);
+            transition: all 0.3s ease;
         }
         
         nav {
@@ -60,8 +54,15 @@
         
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .nav-links {
@@ -74,14 +75,29 @@
         }
         
         .nav-links a {
-            color: var(--secondary-color);
+            color: var(--white);
             text-decoration: none;
-            font-weight: 300;
+            font-weight: 600;
             transition: color 0.3s ease;
+            position: relative;
         }
         
-        .nav-links a:hover {
-            color: var(--accent-color);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .nav-links a:hover::after {
+            visibility: visible;
+            transform: scaleX(1);
         }
         
         .hero {
@@ -95,26 +111,15 @@
             overflow: hidden;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-        
         .hero-content {
             position: relative;
             z-index: 2;
-            color: var(--secondary-color);
+            color: var(--white);
         }
         
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: 4.5rem;
             margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(50px);
@@ -122,7 +127,7 @@
         }
         
         .hero p {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: 1.5rem;
             margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(50px);
@@ -138,9 +143,9 @@
         
         .btn {
             display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            padding: 1rem 2.5rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
             text-decoration: none;
             font-weight: 700;
             border-radius: 50px;
@@ -151,9 +156,10 @@
         }
         
         .btn:hover {
-            background-color: var(--secondary-color);
-            color: var(--accent-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
         }
         
         .section {
@@ -162,10 +168,11 @@
         
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: 3rem;
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             position: relative;
+            color: var(--secondary-color);
         }
         
         .section-title::after {
@@ -173,56 +180,92 @@
             display: block;
             width: 100px;
             height: 3px;
-            background-color: var(--accent-color);
+            background-color: var(--primary-color);
             margin: 1rem auto 0;
         }
         
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
         }
         
         .about-image {
-            position: relative;
-            height: 300px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 500px;
+            margin-right: 2rem;
         }
         
         .about-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .about-image:hover img {
-            transform: scale(1.05);
+        .about-image img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
         }
         
         .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
             line-height: 1.8;
         }
         
         .goals {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goals::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
             background-color: var(--primary-color);
-            color: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .goals::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.1;
         }
         
         .goals-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
         }
         
         .goal-item {
+            flex: 1;
+            min-width: 250px;
+            margin: 1rem;
+            padding: 2rem;
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -234,28 +277,21 @@
         }
         
         .goal-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-color);
-        }
-        
-        .goal-title {
-            font-size: 1.8rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
         
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 0;
         }
         
         .timeline::after {
             content: '';
             position: absolute;
             width: 6px;
-            background-color: var(--timeline-color);
+            background-color: var(--primary-color);
             top: 0;
             bottom: 0;
             left: 50%;
@@ -275,8 +311,8 @@
             width: 25px;
             height: 25px;
             right: -17px;
-            background-color: var(--secondary-color);
-            border: 4px solid var(--accent-color);
+            background-color: var(--white);
+            border: 4px solid var(--primary-color);
             top: 15px;
             border-radius: 50%;
             z-index: 1;
@@ -298,9 +334,9 @@
             width: 0;
             z-index: 1;
             right: 30px;
-            border: medium solid var(--timeline-color);
+            border: medium solid var(--primary-color);
             border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent var(--timeline-color);
+            border-color: transparent transparent transparent var(--primary-color);
         }
         
         .right::before {
@@ -311,9 +347,9 @@
             width: 0;
             z-index: 1;
             left: 30px;
-            border: medium solid var(--timeline-color);
+            border: medium solid var(--primary-color);
             border-width: 10px 10px 10px 0;
-            border-color: transparent var(--timeline-color) transparent transparent;
+            border-color: transparent var(--primary-color) transparent transparent;
         }
         
         .right::after {
@@ -322,30 +358,35 @@
         
         .timeline-content {
             padding: 20px 30px;
-            background-color: white;
+            background-color: var(--white);
             position: relative;
             border-radius: 6px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
         
-        .timeline-content h2 {
-            color: var(--accent-color);
-            margin-bottom: 10px;
+        .timeline-content:hover {
+            transform: scale(1.05);
         }
         
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            padding: 1.5rem 0;
         }
         
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .gallery-item img {
@@ -365,7 +406,7 @@
             left: 0;
             right: 0;
             background-color: rgba(0, 0, 0, 0.7);
-            color: white;
+            color: var(--white);
             padding: 1rem;
             transform: translateY(100%);
             transition: transform 0.3s ease;
@@ -377,18 +418,43 @@
         
         .favorites {
             background-color: var(--primary-color);
-            color: var(--secondary-color);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .favorites::before {
+            content: '🏀';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            font-size: 150px;
+            opacity: 0.1;
+        }
+        
+        .favorites::after {
+            content: '🏆';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            font-size: 150px;
+            opacity: 0.1;
         }
         
         .favorites-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
         }
         
         .favorite-item {
-            background-color: rgba(255, 255, 255, 0.1);
+            flex: 1;
+            min-width: 250px;
+            margin: 1rem;
             padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -402,70 +468,213 @@
         .favorite-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--accent-color);
         }
         
-        .favorite-title {
-            font-size: 1.5rem;
+        .skills {
+            padding: 4rem 0;
+            background-color: var(--bg-color);
+        }
+        
+        .skills-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .skill-item {
+            flex: 1;
+            min-width: 200px;
+            margin: 1rem;
+        }
+        
+        .skill-name {
+            font-weight: bold;
             margin-bottom: 0.5rem;
         }
         
-        footer {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            text-align: center;
-            padding: 3rem 0;
+        .skill-bar {
+            height:  10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
         }
         
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1001;
-            left: 0;
+        .skill-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        .inspiration {
+            background-color: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inspiration-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .inspiration-item {
+            position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
-        
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            max-height: 80%;
-            object-fit: contain;
+
+        .inspiration-item.active {
+            opacity: 1;
         }
-        
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
+
+        .inspiration-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .inspiration-item blockquote {
+            font-style: italic;
+            font-size: 1.2rem;
+            max-width: 80%;
+            margin-bottom: 1rem;
+        }
+
+        .inspiration-item .quote-author {
             font-weight: bold;
-            transition: 0.3s;
         }
-        
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .carousel-controls button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-controls button:hover {
+            background-color: var(--accent-color);
         }
         
-        @media screen and (min-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .about-image {
-                height: 500px;
-            }
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
         }
         
-        @media screen and (max-width: 767px) {
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .stats {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 4rem 0;
+        }
+        
+        .stats-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+        }
+        
+        .quote-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .quote {
+            font-size: 2rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quote-author {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        @media screen and (max-width: 768px) {
             .timeline::after {
                 left: 31px;
             }
@@ -489,29 +698,64 @@
             
             .right {
                 left: 0%;
-            
             }
             
-            .modal-content {
-                width: 100%;
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
             }
         }
-
-        .fade-out {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
         }
-        .fade-in {
-            opacity: 1;
-            transform: translateY(0);
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-color);
+            z-index: 1000;
+            padding: 2rem;
+        }
+        
+        .mobile-nav.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-nav a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            text-decoration: none;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: var(--white);
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo">NM</div>
+            <a href="#" class="logo">NM</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -519,9 +763,24 @@
                 <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#favorites">Favorites</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#inspiration">Inspiration</a></li>
             </ul>
+            <div class="mobile-menu">☰</div>
         </nav>
     </header>
+
+    <div class="mobile-nav">
+        <div class="close-menu">&times;</div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#goals">Goals</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#favorites">Favorites</a>
+        <a href="#skills">Skills</a>
+        <a href="#inspiration">Inspiration</a>
+    </div>
 
     <main>
         <section id="home" class="hero">
@@ -540,9 +799,28 @@
                         <img src="img/photo brat.jpg" alt="Nikita Melnik playing basketball" loading="lazy">
                     </div>
                     <div class="about-text">
-                        <p>my name is Nikita Melnyk my favorite number 3 I live in ukraine I'm 16 years old I decided to take up basketball and get into the nba draft you all think it's funny but look at Dennis Rodman he started seriously at the age of 21. Joel Embiid just started playing basketball at 15. Steven Adams just decided to play basketball at 16. And what I'm getting at is there's always a chance to show what you live for and what you want to do. I want to be a professional basketball player. I've been doing it for a long time. I've been training for it for a long time, so there's something left in me. Remember my first and last name and you'll see it on the draft board, I promise you that. </p>
+                        <p>My name is Nikita Melnyk and my favorite number is 3. I live in Ukraine and I'm 16 years old. I've decided to take up basketball and aim for the NBA draft. You might think it's funny, but look at Dennis Rodman who started seriously at the age of 21. Joel Embiid just started playing basketball at 15. Steven Adams decided to play basketball at 16.</p>
+                        <p>What I'm getting at is there's always a chance to show what you live for and what you want to do. I want to be a professional basketball player. I've been doing it for a long time. I've been training for it for a long time, so there's something left in me. Remember my first and last name and you'll see it on the draft board, I promise you that.</p>
                         <p>Every day, I dedicate myself to honing my skills on the court, pushing my limits, and striving to become the best player I can be. The rhythm of the bouncing ball, the swish of the net, and the energy of the game fuel my determination to succeed in this sport I love so deeply.</p>
-                        <p>Off the court, I'm a diligent student, balancing my academic responsibilities with my athletic pursuits. I believe that discipline and hard work in all aspects of life are crucial to achieving my dreams. My goal is not just to excel in basketball, but to inspire others and make my country proud.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stats-content">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1000">0</div>
+                        <div class="stat-label">Hours Practiced</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-label">Awards Won</div>
                     </div>
                 </div>
             </div>
@@ -553,21 +831,30 @@
                 <h2 class="section-title">My Goals</h2>
                 <div class="goals-content">
                     <div class="goal-item">
-                        <div class="goal-icon" aria-hidden="true">🏀</div>
-                        <h3 class="goal-title">Professional Player</h3>
+                        <div class="goal-icon">🏀</div>
+                        <h3>Professional Player</h3>
                         <p>Become a professional basketball player and compete at the highest level in international leagues.</p>
                     </div>
                     <div class="goal-item">
-                        <div class="goal-icon" aria-hidden="true">🇺🇸</div>
-                        <h3 class="goal-title">Represent The United States of America.</h3>
-                        <p>Proudly represent  United States in international basketball competitions and bring glory to my nation.</p>
+                        <div class="goal-icon">🇺🇸</div>
+                        <h3>Represent The United States</h3>
+                        <p>Proudly represent the United States in international basketball competitions and bring glory to my nation.</p>
                     </div>
                     <div class="goal-item">
-                        <div class="goal-icon" aria-hidden="true">🌟</div>
-                        <h3 class="goal-title">Inspire Others</h3>
-                        <p>Use my journey to inspire young athletes in  United Statesand around the world to pursue their dreams relentlessly.</p>
+                        <div class="goal-icon">🌟</div>
+                        <h3>Inspire Others</h3>
+                        <p>Use my journey to inspire young athletes in the United States and around the world to pursue their dreams relentlessly.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="container">
+                <blockquote class="quote">
+                    "I've failed over and over and over again in my life. And that is why I succeed."
+                </blockquote>
+                <p class="quote-author">- Michael Jordan</p>
             </div>
         </section>
 
@@ -578,31 +865,31 @@
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <h2>2024</h2>
-                            <p>started getting serious about basketball</p>
+                            <p>Started getting serious about basketball</p>
                         </div>
                     </div>
                     <div class="timeline-item right">
                         <div class="timeline-content">
                             <h2>2025</h2>
-                            <p>playing for the european national team</p>
+                            <p>Playing for the European national team</p>
                         </div>
                     </div>
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <h2>2026</h2>
-                            <p>I'm moving to the U.S. to play college ball, and I'm thinking about applying to the draft at 19</p>
+                            <p>Moving to the U.S. to play college ball, considering applying to the draft at 19</p>
                         </div>
                     </div>
                     <div class="timeline-item right">
                         <div class="timeline-content">
                             <h2>2027</h2>
-                            <p>19 years old draft picks in the draft preferably in round 1 </p>
+                            <p>19 years old, aiming for draft picks in round 1</p>
                         </div>
                     </div>
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <h2>2028</h2>
-                            <p>I can tell myself what I've done and I have a lot and a lot more to play for. </p>
+                            <p>Reflecting on achievements and looking forward to future challenges</p>
                         </div>
                     </div>
                 </div>
@@ -611,47 +898,111 @@
 
         <section id="gallery" class="section">
             <div class="container">
-                <h2 class="section-title">my favorite things and values</h2>
+                <h2 class="section-title">My Favorite Things and Values</h2>
                 <div class="gallery">
                     <div class="gallery-item">
-                        <img src="https://i.pinimg.com/enabled_hi/564x/ae/40/d4/ae40d4e4be96523fcf3505654295ca6e.jpg" alt="Golden State Warriors team" loading="lazy">
-                        <div class="gallery-caption">Favorite team</div>
+                        <img src="https://i.pinimg.com/564x/a1/ab/18/a1ab18791273b8752050d65fdbac5269.jpg" alt="Golden State Warriors team" loading="lazy">
+                        <div class="gallery-caption">Favorite team: Golden State Warriors</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="https://i.pinimg.com/enabled_hi/564x/81/3d/c7/813dc76002415f4a76aa00dbe7ad5cf7.jpg" alt="Stephen Curry" loading="lazy">
-                        <div class="gallery-caption">Favorite player</div>
+                        <img src="https://i.pinimg.com/564x/78/0b/48/780b487b00263959fb95c053375e27cd.jpg" alt="Stephen Curry" loading="lazy">
+                        <div class="gallery-caption">Favorite player: lamelo ball</div>
                     </div>
                     <div class="gallery-item">
                         <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/310697/01/fnd/UKR/w/1000/h/1000/fmt/png" alt="PUMA x LAMELO BALL sneakers" loading="lazy">
-                        <div class="gallery-caption">Favorite sneakers</div>
+                        <div class="gallery-caption">Favorite sneakers: PUMA x LAMELO BALL</div>
                     </div>
                     <div class="gallery-item">
                         <img src="https://sportano.ua/img/986c30c27a3d26a3ee16c136f92f4ff5/8/8/887768403096_40-jpg/m-jach-basketbol-nij-wilson-fiba-3x3-replica-rbr-blue-yellow-rozmir-6-896991.jpg" alt="Wilson basketball" loading="lazy">
-                        <div class="gallery-caption">Favorite basketball</div>
+                        <div class="gallery-caption">Favorite basketball: Wilson</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="favorites" class="section favorites">
+        <section id="favorites"  class="section favorites">
             <div class="container">
-                <h2 class="section-title">essential to life</h2>
+                <h2 class="section-title">My Favorite Things</h2>
                 <div class="favorites-content">
                     <div class="favorite-item">
-                        <div class="favorite-icon" aria-hidden="true">🏀</div>
-                        <h3 class="favorite-title">Favorite Ball</h3>
-                        <p>Wilson ball</p>
+                        <div class="favorite-icon">🏀</div>
+                        <h3>Basketball</h3>
+                        <p>My passion and life's calling</p>
                     </div>
                     <div class="favorite-item">
-                        <div class="favorite-icon" aria-hidden="true">👟</div>
-                        <h3 class="favorite-title">Favorite Sneakers</h3>
-                        <p>PUMA x LAMELO BALL</p>
+                        <div class="favorite-icon">🎵</div>
+                        <h3>Hip-Hop</h3>
+                        <p>Music that motivates me</p>
                     </div>
                     <div class="favorite-item">
-                        <div class="favorite-icon" aria-hidden="true">🏆</div>
-                        <h3 class="favorite-title">Favorite Team</h3>
-                        <p>Golden State Warriors</p>
+                        <div class="favorite-icon">📚</div>
+                        <h3>Biographies</h3>
+                        <p>Learning from the greats</p>
                     </div>
+                    <div class="favorite-item">
+                        <div class="favorite-icon">🍕</div>
+                        <h3>Pizza</h3>
+                        <p>My favorite cheat meal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills">
+            <div class="container">
+                <h2 class="section-title">My Skills</h2>
+                <div class="skills-content">
+                    <div class="skill-item">
+                        <div class="skill-name">Shooting</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="60"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Dribbling</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="40"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Defense</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="69"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Teamwork</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="inspiration" class="section inspiration">
+            <div class="container">
+                <h2 class="section-title">Basketball Inspiration</h2>
+                <div class="inspiration-carousel">
+                    <div class="inspiration-item active">
+                        <img src="https://i.pinimg.com/564x/81/3d/c7/813dc76002415f4a76aa00dbe7ad5cf7.jpg" alt="Stephen Curry" loading="lazy">
+                        <blockquote>"I've never been afraid of big moments. I get butterflies... I get nervous and anxious, but I think those are all good signs that I'm ready for the moment."</blockquote>
+                        <p class="quote-author">- Stephen Curry</p>
+                    </div>
+                    <div class="inspiration-item">
+                        <img src="https://i.pinimg.com/enabled/564x/ca/16/f9/ca16f915c3aa9d9bc6ebdc7ab9e441ca.jpg" alt="Michael Jordan" loading="lazy">
+                        <blockquote>"I've missed more than 9,000 shots in my career. I've lost almost 300 games. Twenty-six times, I've been trusted to take the game-winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed."</blockquote>
+                        <p class="quote-author">- Michael Jordan</p>
+                    </div>
+                    <div class="inspiration-item">
+                        <img src="https://i.pinimg.com/enabled/564x/b1/6d/b8/b16db858f19c91582e92a1187876e1d0.jpg" alt="Kobe Bryant" loading="lazy">
+                        <blockquote>"The most important thing is to try and inspire people so that they can be great in whatever they want to do."</blockquote>
+                        <p class="quote-author">- Kobe Bryant</p>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev-btn" aria-label="Previous inspiration">&lt;</button>
+                    <button class="next-btn" aria-label="Next inspiration">&gt;</button>
                 </div>
             </div>
         </section>
@@ -659,16 +1010,39 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 Nikita Melnik. All rights reserved.</p>
+            <p>&copy; 2024 Nikita Melnik. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/nikitamelnik.3?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </footer>
 
-    <div id="imageModal" class="modal">
-        <span class="close" aria-label="Close">&times;</span>
-        <img class="modal-content" id="modalImage" alt="Enlarged gallery image">
-    </div>
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
 
     <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const closeMenuBtn = document.querySelector('.close-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -679,63 +1053,106 @@
             });
         });
 
-        // Header background change on scroll
-        const header = document.querySelector('header');
-        const scrollThreshold = 100;
+        // Back to top button functionality
+        const backToTopBtn = document.querySelector('.back-to-top');
 
-        function handleScroll() {
-            if (window.scrollY > scrollThreshold) {
-                header.classList.add('scrolled');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
             } else {
-                header.classList.remove('scrolled');
+                backToTopBtn.classList.remove('visible');
             }
-        }
+        });
 
-        window.addEventListener('scroll', handleScroll);
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
+        // Animate skill bars on scroll
+        const skillBars = document.querySelectorAll('.skill-progress');
+
+        const animateSkillBars = () => {
+            skillBars.forEach(bar => {
+                const progress = bar.getAttribute('data-progress');
+                bar.style.width = progress + '%';
+            });
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
+        const skillsSection = document.querySelector('.skills');
+        let animated = false;
+
+        window.addEventListener('scroll', () => {
+            if (isInViewport(skillsSection) && !animated) {
+                animateSkillBars();
+                animated = true;
+            }
+        });
+
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Animate stats counters
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let statsAnimated = false;
+
+        const animateStats = () => {
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const count = +stat.innerText;
+                const increment = target / 200;
+
+                if (count < target) {
+                    stat.innerText = Math.ceil(count + increment);
+                    setTimeout(() => animateStats(), 1);
+                } else {
+                    stat.innerText = target;
                 }
             });
-        }, observerOptions);
+        };
 
-        document.querySelectorAll('.section, .timeline-item, .gallery-item, .favorite-item').forEach(el => {
-            el.classList.add('fade-out');
-            observer.observe(el);
-        });
+        const statsSection = document.querySelector('.stats');
 
-        // Image modal functionality
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        const closeBtn = document.getElementsByClassName('close')[0];
-
-        document.querySelectorAll('.gallery-item img').forEach(img => {
-            img.onclick = function() {
-                modal.style.display = "block";
-                modalImg.src = this.src;
-                modalImg.alt = this.alt;
+        window.addEventListener('scroll', () => {
+            if (isInViewport(statsSection) && !statsAnimated) {
+                animateStats();
+                statsAnimated = true;
             }
         });
 
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
+        // Inspiration carousel functionality
+        const inspirationItems = document.querySelectorAll('.inspiration-item');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+
+        function showInspiration(index) {
+            inspirationItems.forEach(item => item.classList.remove('active'));
+            inspirationItems[index].classList.add('active');
         }
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + inspirationItems.length) % inspirationItems.length;
+            showInspiration(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % inspirationItems.length;
+            showInspiration(currentIndex);
+        });
+
+        // Auto-rotate carousel
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % inspirationItems.length;
+            showInspiration(currentIndex);
+        }, 10000); // Change slide every 10 seconds
     </script>
 </body>
 </html>
